@@ -6,10 +6,11 @@ import { UserButton, useUser } from "@clerk/nextjs";
 import { CircleUserRound, Menu, Search, ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
 const Navbar = () => {
+  const pathname = usePathname();
   const router = useRouter();
   const { user } = useUser();
   const cart = useCart();
@@ -24,16 +25,28 @@ const Navbar = () => {
       </Link>
 
       <div className="flex gap-4 text-base-bold max-lg:hidden">
-        <Link href={"/"} className="hover:text-red-1">
+        <Link
+          href={"/"}
+          className={`hover:text-red-1 ${
+            pathname === "/wishlist" && "text-red-1"
+          }`}
+        >
           Home
         </Link>
         <Link
           href={user ? "/wishlist" : "/sign-in"}
-          className="hover:text-red-1"
+          className={`hover:text-red-1 ${
+            pathname === "/wishlist" && "text-red-1"
+          }`}
         >
           Wishlist
         </Link>
-        <Link href={user ? "/orders" : "/sign-in"} className="hover:text-red-1">
+        <Link
+          href={user ? "/" : "/sign-in"}
+          className={`hover:text-red-1 ${
+            pathname === "/wishlist" && "text-red-1"
+          }`}
+        >
           Orders
         </Link>
       </div>
@@ -45,8 +58,11 @@ const Navbar = () => {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-        <button disabled={query === ""} onClick={() => router.push(`/search/${query}`)}>
-        <Search className="cursor-pointer h-4 w-4 hover:text-red-1" />
+        <button
+          disabled={query === ""}
+          onClick={() => router.push(`/search/${query}`)}
+        >
+          <Search className="cursor-pointer h-4 w-4 hover:text-red-1" />
         </button>
       </div>
 
