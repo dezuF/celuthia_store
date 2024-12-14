@@ -18,8 +18,6 @@ const Cart = () => {
   );
   const totalRounded = parseFloat(total.toFixed(2));
 
-  console.log(user);
-
   const customer = {
     clerkId: user?.id,
     email: user?.emailAddresses[0].emailAddress,
@@ -55,7 +53,7 @@ const Cart = () => {
         ) : (
           <div>
             {cart.cartItems.map((cartItem) => (
-              <div className="w-full flex max-sm:flex-col max-sm:gap-3 hover:bg-grey-1 px-6 py-4 items-center max-sm:items-start justify-between">
+              <div className="w-full flex max-sm:flex-col max-sm:gap-3 hover:bg-grey-1 px-4 py-3 items-center max-sm:items-start justify-between">
                 <div className="flex items-center">
                   <Image
                     src={cartItem.item.media[0]}

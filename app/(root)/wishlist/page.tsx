@@ -70,4 +70,7 @@ const Wishlist = () => {
     </div>
   )
 }
+
+export const dynamic = "force-dynamic";
+
 export default Wishlist;
